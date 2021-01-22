@@ -8,7 +8,7 @@ This repository is a fork of [grbl](https://github.com/gnea/grbl) with support f
 ## Servo details
 The main idea is to use the PWM signal normally used for spindle control in `grbl` to send a PWM signal to the servo for up/down motion. NB: the added servo functionality will only operate in 'non laser' ($32=0) mode
 
-Connect the servo PWM signal input to the `Z-` pin on the Arduino CNC shield (or the `D11` pin on the arduino).
+Connect the servo PWM signal input to the `Z-` or `Z+` pin on the Arduino CNC shield (or the `D11` pin on the arduino).
 
 G-code to operate the servo
 ```gcode
