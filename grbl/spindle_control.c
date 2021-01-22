@@ -21,8 +21,8 @@
 
 #include "grbl.h"
 
-#define RC_SERVO_SHORT      15      // set min pulse duration to (7 = 0.5ms, 15 = 1.03ms, 20=1.40ms)    // RC Servo
-#define RC_SERVO_LONG       31      // set max pulse duration (38 = 2.49ms, 31 = 2.05ms)                // RC Servo
+#define RC_SERVO_SHORT      7      // set min pulse duration to (7 = 0.5ms, 15 = 1.03ms, 20=1.40ms)    // RC Servo
+#define RC_SERVO_LONG       17      // set max pulse duration (38 = 2.49ms, 31 = 2.05ms)                // RC Servo
 #define RC_SERVO_RANGE      (RC_SERVO_LONG-RC_SERVO_SHORT)                                              // RC Servo
 // #define RC_SERVO_INVERT  1       // Uncomment to invert servo direction                              // RC Servo
 
