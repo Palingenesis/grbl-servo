@@ -1,3 +1,37 @@
+
+# grbl-servo
+`grbl-servo` can be used on Arduino to control an X-Y pen plotter, where the pen is operated by a small servo motor such as an SG90 micro servo.
+
+This repository is a fork of [grbl](https://github.com/gnea/grbl) with support for a servo. It is different from the other `grbl-servo` repositories in that it is a proper fork: I will reapply the hacked-on servo control when `grbl` updates by rebasing the default `servo` branch based on the upstream `grbl/master`.
+
+
+## Servo details
+The main idea is to use the PWM signal normally used for spindle control in `grbl` to send a PWM signal to the servo for up/down motion. NB: the added servo functionality will only operate in 'non laser' ($32=0) mode
+
+Connect the servo PWM signal input to the `Z-` pin on the Arduino CNC shield (or the `D11` pin on the arduino).
+
+G-code to operate the servo
+```gcode
+M3 S255     (turn servo full on)
+M5          (turn servo off)
+M3          (turn servo full on)
+M5          (turn servo off)
+M3 S127     (turn servo half way)
+M5          (turn servo off)
+M3          (turn servo half way)
+M5          (turn servo off)
+```
+
+The operating range of the servo depends on the PWM signal sent. By default, it sends pulses between ~0.5 and ~1.25 μs for a 45 degree angle between up (`M5` or `M3 S0`) and down (`M3 S255`) on my SG90 micro servo. You can edit the pulse width range in the file [`grbl/servo_control.c`](https://github.com/vankesteren/grbl-servo/blob/servo/grbl/spindle_control.c#L24).
+
+## Edit details
+The servo code was taken from commit [`21b4532`](https://github.com/lavolpecheprogramma/grbl-1-1h-servo/commit/21b45327887d228d65d967857ac77b6b883b34fc) on the [`grbl-1-1h-servo`]() repository by @lavolpecheprogramma based on work by @DWiskow, who in turn probably got their ideas from the [`grbl-servo`](https://github.com/robottini/grbl-servo) repo by @robottini (the code is very similar!).
+
+---
+
+
+
+
 ![GitHub Logo](https://github.com/gnea/gnea-Media/blob/master/Grbl%20Logo/Grbl%20Logo%20250px.png?raw=true)
 
 ***
