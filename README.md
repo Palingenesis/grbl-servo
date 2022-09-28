@@ -6,23 +6,40 @@ This repository is a fork of [grbl](https://github.com/gnea/grbl) with support f
 
 
 ## Servo details
-The main idea is to use the PWM signal normally used for spindle control in `grbl` to send a PWM signal to the servo for up/down motion. NB: the added servo functionality will only operate in 'non laser' ($32=0) mode
+The main idea is to use the PWM signal normally used for spindle Speed control in `grbl`. Instead the PWM will be used to control the position of the servo.
+NB: the added servo functionality will only operate in 'non laser' ($32=0) mode
 
-Connect the servo PWM signal input to the `Z-` or `Z+` pin on the Arduino CNC shield (or the `D11` pin on the arduino).
+The Servo PWM signal input connects to Arduino D11. Spindle Speed. If using an old CNC Shield this will be the pins marked `Z-` or `Z+`.
 
-G-code to operate the servo
+G-code to operate the servo, is M03 and M05.
+M05 has no settings, it is just as is, it returns the Servo to it's minimum, unless the optoin to reverse it has been set.
+M03 can have a setting value, represented by 'S' followed with a Number. The number can be in the range of the Max and Min settings of the Spindle Speed.
+The Min/Max settings will be reverced if the option has been set in the options.
+When using a Servo I recomend setting the RPM min/max speeds to 0 and 180, this way they will roughly represent the angle of the Servo.
+The commands to change RPM min/max speeds are:
 ```gcode
-M3 S255     (turn servo full on)
+ $30=180
+ $31=0
+```
+Example code
+```gcode
+M3 S180     (turn servo full on)
 M5          (turn servo off)
 M3          (turn servo full on)
 M5          (turn servo off)
-M3 S127     (turn servo half way)
+M3 S90		(turn servo half way)
 M5          (turn servo off)
-M3          (turn servo half way)
+M3          (turn servo full way)
 M5          (turn servo off)
 ```
+Servos have no standard, apart from midway on there travel. The mid point of Servos should be when the signal is 1.5ms.
+Peaople think that 90 deegrees either side of midway should be +-0.5ms, this is not the case, it is not set in stone. Manufacturers chose there own pulswidth for min and max positions.
+There could be a difference of +-0.8ms either side of midway.
 
-The operating range of the servo depends on the PWM signal sent. By default, it sends pulses between ~0.5 and ~1.25 μs for a 45 degree angle between up (`M5` or `M3 S0`) and down (`M3 S255`) on my SG90 micro servo. You can edit the pulse width range in the file [`grbl/servo_control.c`](https://github.com/vankesteren/grbl-servo/blob/servo/grbl/spindle_control.c#L24).
+The operating range of the servo depends on the PWM signal sent.
+To cover all, by default, the code is set to give a range between 0.7ms and 2.3ms pulse width.
+See the file [`grbl/spindle_control.c`](https://github.com/vankesteren/grbl-servo/blob/servo/grbl/spindle_control.c#L24).
+All code to do with the Servo is commented with ```c++code //	RC Servo '''
 
 ## Edit details
 The servo code was taken from commit [`21b4532`](https://github.com/lavolpecheprogramma/grbl-1-1h-servo/commit/21b45327887d228d65d967857ac77b6b883b34fc) on the [`grbl-1-1h-servo`]() repository by @lavolpecheprogramma based on work by @DWiskow, who in turn probably got their ideas from the [`grbl-servo`](https://github.com/robottini/grbl-servo) repo by @robottini (the code is very similar!).
