@@ -23,14 +23,14 @@ The commands to change RPM min/max speeds are:
 ```
 Example code
 ```gcode
-M3 S180     (turn servo full on)
-M5          (turn servo off)
-M3          (turn servo full on)
-M5          (turn servo off)
-M3 S90		(turn servo half way)
-M5          (turn servo off)
-M3          (turn servo full way)
-M5          (turn servo off)
+M3 S180   (turn servo full on)
+M5        (turn servo off)
+M3        (turn servo full on)
+M5        (turn servo off)
+M3 S90    (turn servo half way)
+M5        (turn servo off)
+M3        (turn servo full way)
+M5        (turn servo off)
 ```
 Servos have no standard, apart from midway on there travel. The mid point of Servos should be when the signal is 1.5ms.
 Peaople think that 90 deegrees either side of midway should be +-0.5ms, this is not the case, it is not set in stone. Manufacturers chose there own pulswidth for min and max positions.
@@ -40,6 +40,13 @@ The operating range of the servo depends on the PWM signal sent.
 To cover all, by default, the code is set to give a range between 0.512ms and 2.489ms pulse width.
 See the file `grbl/spindle_control.c`.
 All code to do with the Servo is commented with ` /* RC Servo */ '
+
+Upload the firmware to your device the same way you would do with the original grbl.
+Copy the folder 'grbl' to the 'libraries' folder in your 'Arduino' folder. 'driv:\user\Documents\Arduino\libraries' (replace the original if you have it)
+Start Arduino IDE,
+Select 'Tools' and set your 'Board' and 'COM Port',
+Select 'File' => 'Examples' scrole to 'grbl' => 'GrblUpload',
+Click 'Upload Button'.
 
 ## Edit details
 The servo code was taken from commit [`21b4532`](https://github.com/lavolpecheprogramma/grbl-1-1h-servo/commit/21b45327887d228d65d967857ac77b6b883b34fc) on the [`grbl-1-1h-servo`]() repository by @lavolpecheprogramma based on work by @DWiskow, who in turn probably got their ideas from the [`grbl-servo`](https://github.com/robottini/grbl-servo) repo by @robottini (the code is very similar!).
