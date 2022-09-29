@@ -9,14 +9,14 @@ I will reapply the hacked-on servo control when `grbl` updates by rebasing the d
 ## Servo details
 The main idea is to use the PWM signal normally used for spindle Speed control in `grbl`.<br />
 Instead the PWM will be used to control the position of the servo.<br />
-NB: the added servo functionality will only operate in 'non laser' ($32=0) mode<br />
+NB: the added servo functionality will only operate in `non laser` ($32=0) mode<br />
 
 The Servo PWM signal input connects to Arduino D11. Spindle Speed.<br />
 If using an old CNC Shield this will be the pins marked `Z-` or `Z+`.<br />
 
 G-code to operate the servo, is M03 and M05.<br />
 M05 has no settings, it is just as is, it returns the Servo to it's minimum, unless the optoin to reverse it has been set.<br />
-M03 can have a setting value, represented by 'S' followed with a Number. The number can be in the range of the Max and Min settings of the Spindle Speed.<br />
+M03 can have a setting value, represented by `S` followed with a Number. The number can be in the range of the Max and Min settings of the Spindle Speed.<br />
 The Min/Max settings will be reversed if the option has been set in the options.<br />
 When using a Servo I recomend setting the RPM min/max speeds to 0 and 180, this way they will roughly represent the angle of the Servo.<br />
 The commands to change RPM min/max speeds are:
@@ -24,14 +24,12 @@ The commands to change RPM min/max speeds are:
  $30=180
  $31=0
 ```
-Example code
+##  Example code
 ```gcode
 M3 S180   (turn servo full on)
 M3 S90    (turn servo half way)
 M3 S0     (turn servo off)
 M3        (turn servo full on)
-M5        (turn servo off)
-M3        (turn servo full way)
 M5        (turn servo off)
 ```
 Servos have no standard, apart from midway on there travel.<br />
@@ -43,17 +41,17 @@ There could be a difference of +-0.8ms either side of midway.<br />
 The operating range of the servo depends on the PWM signal sent.<br />
 By default, the code is set to give a range between 0.512ms and 2.489ms pulse width.<br />
 See the file `grbl/spindle_control.c`.<br />
-All code to do with the Servo is commented with '/* RC Servo */'<br />
+All code to do with the Servo is commented with `/* RC Servo */`<br />
 See the comments to see how to calculate the min and max positions, if your servo does not move to the extreams.
 
 ## Install details
 Upload the firmware to your device the same way you would do with the original grbl.<br />
-Copy the folder 'grbl' to the 'libraries' folder in your 'Arduino' folder. 'driv:\user\Documents\Arduino\libraries'<br />
+Copy the folder `grbl` to the `libraries` folder in your `Arduino` folder. `driv:\user\Documents\Arduino\libraries`<br />
 (replace the original if you have it)<br />
 Start Arduino IDE,<br />
-Select 'Tools' and set your 'Board' and 'COM Port',<br />
-Select 'File' => 'Examples' scrole to 'grbl' => 'GrblUpload',<br />
-Click 'Upload Button'.<br />
+Select `Tools` and set your `Board` and `COM Port`,<br />
+Select `File` => `Examples` scrole to `grbl` => `GrblUpload`,<br />
+Click `Upload Button`.<br />
 
 ## Edit details
 The servo code was taken from commit [`21b4532`](https://github.com/lavolpecheprogramma/grbl-1-1h-servo/commit/21b45327887d228d65d967857ac77b6b883b34fc) on the [`grbl-1-1h-servo`]() repository by @lavolpecheprogramma based on work by @DWiskow, who in turn probably got their ideas from the [`grbl-servo`](https://github.com/robottini/grbl-servo) repo by @robottini (the code is very similar!).
