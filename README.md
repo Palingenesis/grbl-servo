@@ -39,7 +39,7 @@ There could be a difference of +-0.8ms either side of midway.
 The operating range of the servo depends on the PWM signal sent.
 To cover all, by default, the code is set to give a range between 0.7ms and 2.3ms pulse width.
 See the file [`grbl/spindle_control.c`](https://github.com/vankesteren/grbl-servo/blob/servo/grbl/spindle_control.c#L24).
-All code to do with the Servo is commented with ```c++code //	RC Servo '''
+All code to do with the Servo is commented with ` /* RC Servo */ '
 
 ## Edit details
 The servo code was taken from commit [`21b4532`](https://github.com/lavolpecheprogramma/grbl-1-1h-servo/commit/21b45327887d228d65d967857ac77b6b883b34fc) on the [`grbl-1-1h-servo`]() repository by @lavolpecheprogramma based on work by @DWiskow, who in turn probably got their ideas from the [`grbl-servo`](https://github.com/robottini/grbl-servo) repo by @robottini (the code is very similar!).
