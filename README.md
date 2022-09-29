@@ -16,14 +16,15 @@ If using an old CNC Shield this will be the pins marked `Z-` or `Z+`.<br />
 
 G-code to operate the servo, is M03 and M05.<br />
 M05 has no settings, it is just as is, it returns the Servo to it's minimum, unless the optoin to reverse it has been set.<br />
-M03 can have a setting value, represented by `S` followed with a Number. The number can be in the range of the Max and Min settings of the Spindle Speed.<br />
-The Min/Max settings will be reversed if the option has been set in the options.<br />
+M03 can have a setting value, represented by `S` followed with a `number`. The number can be in the range of the Max and Min settings of the Spindle Speed.<br />
+The Min/Max settings will be reversed if the option has been set in the code.<br />
 When using a Servo I recomend setting the RPM min/max speeds to 0 and 180, this way they will roughly represent the angle of the Servo.<br />
-The commands to change RPM min/max speeds are:
+The commands to change the Spindle RPM min/max are:
 ```gcode
  $30=180
  $31=0
 ```
+The command to check the settings is ~$$~
 ##  Example code
 ```gcode
 M3 S180   (turn servo full on)
@@ -46,7 +47,7 @@ See the comments to see how to calculate the min and max positions, if your serv
 
 ## Install details
 Upload the firmware to your device the same way you would do with the original grbl.<br />
-Copy the folder `grbl` to the `libraries` folder in your `Arduino` folder. `driv:\user\Documents\Arduino\libraries`<br />
+Copy the folder `grbl` to the `libraries` folder in your `Arduino` folder. `<i>drive</i>:\<i>user</i>\Documents\Arduino\libraries\`<br />
 (replace the original if you have it)<br />
 Start Arduino IDE,<br />
 Select `Tools` and set your `Board` and `COM Port`,<br />
