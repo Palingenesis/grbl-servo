@@ -37,8 +37,8 @@ Peaople think that 90 deegrees either side of midway should be +-0.5ms, this is 
 There could be a difference of +-0.8ms either side of midway.
 
 The operating range of the servo depends on the PWM signal sent.
-To cover all, by default, the code is set to give a range between 0.7ms and 2.3ms pulse width.
-See the file [`grbl/spindle_control.c`](https://github.com/vankesteren/grbl-servo/blob/servo/grbl/spindle_control.c#L24).
+To cover all, by default, the code is set to give a range between 0.512ms and 2.489ms pulse width.
+See the file `grbl/spindle_control.c`.
 All code to do with the Servo is commented with ` /* RC Servo */ '
 
 ## Edit details
