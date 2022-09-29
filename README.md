@@ -24,7 +24,7 @@ The commands to change the Spindle RPM min/max are:
  $30=180
  $31=0
 ```
-The command to check the settings is ~$$~
+The command to check the settings is `$$`
 ##  Example code
 ```gcode
 M3 S180   (turn servo full on)
